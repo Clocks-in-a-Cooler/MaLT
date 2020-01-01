@@ -1,0 +1,66 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+}
+
+body, viewer {
+    font: menu;
+}
+
+button {
+    font-size: 14px;
+    background-color: powderblue;
+    border: none;
+    padding: 0.5em 1em;
+    transition: background-color 0.5s;
+}
+
+button:hover {
+    background-color: skyblue;
+    transition: background-color 0.5s;
+}
+
+button:active {
+    background-color: dodgerblue;
+}
+
+button:disabled {
+    background-color: tan;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 100vw;
+    position: relative;
+}
+
+.content {
+    height: 100vh;
+    display: flex;
+}
+
+.rendered-html {
+    min-height: 100%;
+    max-width: 100%;
+    flex-grow: 1;
+    padding: 1em;
+    overflow: scroll;
+    font-size: 16px;
+}

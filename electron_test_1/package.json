@@ -1,0 +1,17 @@
+{
+  "name": "electron_test",
+  "productName": "synonymous-locket-sketch",
+  "description": "My Electron application description",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "cacan_000",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^5.0.0-beta.7"
+  },
+  "license": "MIT"
+}

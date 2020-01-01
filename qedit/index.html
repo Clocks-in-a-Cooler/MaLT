@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Q Edit</title>
+        <link rel="stylesheet" href="styles.css"/>
+        
+        <!-- link CodeMirror -->
+        <script src="lib/codemirror.js"></script>
+        <link rel="stylesheet" href="lib/codemirror.css" />
+        <script src="mode/javascript/javascript.js"></script>
+    </head>
+    <body>
+        <section id="controls">
+            <input id="open_file" type="file"></input>
+            <button id="save_file">Save File</button>
+        </section>
+        <section class="content">
+            <div id="editor">
+                <!-- codemirror will go here. -->
+            </div>
+        </section>
+        <script src="qedit.js"></script>
+    </body>
+</html>

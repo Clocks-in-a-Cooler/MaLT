@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8" />
+        <style>
+            html {
+                height: 100%;
+                overflow: hidden;
+            }
+        
+            body {
+                padding: 2%;
+                height: 100%;
+                font-family: "Consolas", monospace;
+                font-size: 11pt;
+            }
+            
+            div#canvas-wrapper {
+                margin: 0px;
+                border: 1px solid black;
+                height: 90%;
+                width: 70%;
+                position: inline;
+                float: left;
+                overflow: hidden;
+            }
+            
+            canvas {
+                margin: 0px;
+                border: 0px;
+                padding: 0px;
+            }
+            
+            div#sidepanel {
+                margin: 0px;
+                margin-left: 0%;
+                height: 90%;
+                width: 25%;
+                float: right;
+                display: inline;
+                border: 1px solid black;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="canvas-wrapper">
+            <canvas></canvas>
+        </div>
+        <div id="sidepanel">
+            <div id="current"></div>
+            <div id="selected"></div>
+        </div>
+        <script src="click_drag_select.js"></script>
+        <script>
+            init();
+        </script>
+    </body>
+</html>

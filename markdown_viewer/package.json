@@ -1,0 +1,19 @@
+{
+    "name": "markdown-viewer",
+    "productName": "Markdown Viewer",
+    "description": "View Markdown files.",
+    "main": "./main.js",
+    "version": "0.0.1",
+    "author": "clocks-in-a-cooler",
+    "scripts": {
+        "start": "electron ."
+    },
+    "dependencies": {
+        "marked": "latest"
+    },
+    "devDependencies": {
+        "electron": "6.0.0",
+        "electron-packager": "latest"
+    },
+    "license": "Unlicense"
+}

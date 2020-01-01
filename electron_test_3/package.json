@@ -1,0 +1,16 @@
+{
+    "name": "electron_test_3",
+    "productName": "Electron Test 3 -- Arguments",
+    "description": "testing out Electron with arguments.",
+    "main": "./main.js",
+    "version": "0.0.1",
+    "author": "clocks-in-a-cooler",
+    "scripts": {
+        "start": "electron ."
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "electron": "6.0.0"
+    },
+    "license": "Unlicense"
+}

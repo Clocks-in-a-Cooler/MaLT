@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<drjava version="drjava-20160913-225446">
+  <project autorefresh="false" build="bin/" main="SwingTest" manifest="" root="" work="src/">
+    <createjar file="swingtest.jar" flags="5"/>
+    <source>
+      <file active="true" name="src/SwingTest.java" package="" timestamp="16-Dec-2019 08:17:26">
+        <select from="292" to="292"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="src/Trigger.java" package="" timestamp="14-Dec-2019 15:26:00">
+        <select from="292" to="292"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="src/Vector.java" package="" timestamp="16-Dec-2019 16:40:44">
+        <select from="292" to="292"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="src/BubblePanel.java" package="" timestamp="16-Dec-2019 16:47:00">
+        <select from="292" to="292"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="src/Bubble.java" package="" timestamp="16-Dec-2019 16:48:48">
+        <select from="292" to="292"/>
+        <scroll column="0" row="0"/>
+      </file>
+    </source>
+    <included/>
+    <excluded/>
+    <collapsed/>
+    <classpath/>
+    <breakpoints/>
+    <watches/>
+    <bookmarks/>
+    <preferences/>
+  </project>
+</drjava>

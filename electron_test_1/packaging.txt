@@ -1,0 +1,3 @@
+to use electron-packager:
+
+electron-packager <source dir> <app name> --platform=win32 --arch=x64
