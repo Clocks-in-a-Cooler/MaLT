@@ -59,6 +59,8 @@ function Boat(pos, width) {
 }
 
 Boat.prototype.move_speed = 0.3;
+Boat.prototype.friction = 0.03;
+Boat.prototype.power = 0.01;
 Boat.prototype.rot_speed = Math.PI / 2000;
 
 Boat.prototype.control = function() {
