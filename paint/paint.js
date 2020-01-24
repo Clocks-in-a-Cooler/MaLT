@@ -35,6 +35,17 @@ addEventListener("click", function() {
     mouse.click();
 });
 
+addEventListener("keyup", function(evt) {
+    var controls = document.getElementById("controls");
+    if (evt.keyCode == 32) {
+        controls.style.visibility = controls.style.visibility == "hidden" ? "visible" : "hidden";  
+    }
+    
+    if (evt.keyCode == 13) {
+        save_image();
+    }
+});
+
 var tools = {
     "pencil": {
         last_pos: null,
@@ -69,9 +80,64 @@ var tools = {
             control_cxt.restore();
         },
     },
+    
+    "eraser": {
+        update: function() {
+            if (mouse.clicking) {
+                image_cxt.save();
+                image_cxt.translate(mouse.pos.x, mouse.pos.y);
+                image_cxt.clearRect(-15, -15, 30, 30);
+                image_cxt.restore();
+            }
+            
+            //draw the actual eraser
+            control_cxt.save();
+            control_cxt.strokeStyle = "black";
+            control_cxt.translate(mouse.pos.x, mouse.pos.y);
+            control_cxt.beginPath(); //satisfaction from the shape of the lines
+            control_cxt.moveTo(-15, -15);
+            control_cxt.lineTo(15, -15);
+            control_cxt.lineTo(15, 15);
+            control_cxt.lineTo(-15, 15);
+            control_cxt.lineTo(-15, -15);
+            control_cxt.closePath();
+            control_cxt.stroke();
+            control_cxt.restore();
+        },
+    },
 };
 
 var current_tool = tools["pencil"];
+
+function create_rbutton_group(element, callback) {
+    var buttons = element.childNodes;
+    //nesting! fun! i code terrible!
+    buttons.forEach((b) => {
+        b.addEventListener("click", () => {
+            buttons.forEach((u) => {
+                u.className = "rbutton";
+            });
+            
+            b.className += " selected";
+            callback(b.id);
+        });
+    });
+}
+
+create_rbutton_group(document.getElementById("colour_controls"), function(c) {
+    image_cxt.strokeStyle = image_cxt.fillStyle = c;
+});
+
+create_rbutton_group(document.getElementById("tools"), function(t) {
+    current_tool = tools[t];
+});
+
+var save_image = function() {
+  var link = document.createElement('a');
+  link.download = 'whiteboard.png';
+  link.href = image_layer.toDataURL()
+  link.click();
+}
 
 //cycling and updating the canvas
 var last_time = null, lapse = 0;
