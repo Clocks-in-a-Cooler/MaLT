@@ -16,6 +16,5 @@ scroll up or down to adjust pencil/eraser size
 
 * this little project is not intended to replace anything. I just thought it'd be interesting to make it. (why after midnight, I have no idea)
 
- > super quick, super cheap, super impractical, mission accomplished!"
- 
+ > "super quick, super cheap, super impractical, mission accomplished!"
  > &mdash; Colin Furze
