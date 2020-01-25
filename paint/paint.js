@@ -9,13 +9,41 @@ image_layer.width = control_layer.width = window.innerWidth;
 image_layer.height = control_layer.height = window.innerHeight;
 
 image_cxt.strokeStyle = "dodgerblue";
-image_cxt.strokeWidth = 2;
+image_cxt.lineWidth = 2;
+
+var draw_size = 1;
 
 var mouse = {
     clicking: false,
     pos: {x: null, y: null},
     click: function() {
         console.log("mouse click at (" + this.pos.x + ", " + this.pos.y + ")");
+    },
+    scroll: function(evt) {
+        var direction = this.find_scroll_direction(evt);
+        if (direction == "down") {
+            draw_size -= 0.1;
+            draw_size = Math.max(draw_size, 0.2);
+        } else {
+            draw_size += 0.1;
+            draw_size = Math.min(draw_size, 5);
+        }
+    },
+    // courtesy of Stack Overflow
+    find_scroll_direction: function(e) {
+        var delta;
+
+        if (e.wheelDelta){
+            delta = e.wheelDelta;
+        } else {
+            delta = -1 * e.deltaY;
+        }
+
+        if (delta < 0){
+            return "down";
+        } else if (delta > 0){
+            return "up";
+        }
     },
 };
 
@@ -31,9 +59,9 @@ addEventListener("mousemove", function(evt) {
     mouse.pos = { x: evt.clientX, y: evt.clientY };
 });
 
-addEventListener("click", function() {
-    mouse.click();
-});
+addEventListener("click", (evt) => { mouse.click(); });
+
+window.addEventListener("wheel", (evt) => { mouse.scroll(evt); }, false);
 
 addEventListener("keyup", function(evt) {
     var controls = document.getElementById("controls");
@@ -49,15 +77,29 @@ addEventListener("keyup", function(evt) {
 var tools = {
     "pencil": {
         last_pos: null,
+        size: 2,
         update: function() {
             if (mouse.clicking) {
                 if (this.last_pos != null) {
                     //draw!
+                    image_cxt.lineWidth = this.size * draw_size;
                     image_cxt.beginPath();
                     image_cxt.moveTo(this.last_pos.x, this.last_pos.y);
                     image_cxt.lineTo(mouse.pos.x, mouse.pos.y);
                     image_cxt.closePath();
                     image_cxt.stroke();
+                    
+                    //had to fix something
+                    image_cxt.fillStyle = image_cxt.strokeStyle;
+                    image_cxt.beginPath();
+                    image_cxt.moveTo(this.last_pos.x, this.last_pos.y);
+                    image_cxt.arc(this.last_pos.x, this.last_pos.y,
+                        this.size * draw_size * 0.5, 0, Math.PI * 2);
+                    image_cxt.moveTo(mouse.pos.x, mouse.pos.y);
+                    image_cxt.arc(mouse.pos.x, mouse.pos.y,
+                        this.size * draw_size * 0.5, 0, Math.PI * 2);
+                    image_cxt.closePath();
+                    image_cxt.fill();
                 }
                 
                 this.last_pos = mouse.pos;
@@ -82,11 +124,15 @@ var tools = {
     },
     
     "eraser": {
+        size: 15,
         update: function() {
             if (mouse.clicking) {
                 image_cxt.save();
                 image_cxt.translate(mouse.pos.x, mouse.pos.y);
-                image_cxt.clearRect(-15, -15, 30, 30);
+                image_cxt.clearRect(-1 * this.size * draw_size,
+                    -1 * this.size * draw_size,
+                    2 * this.size * draw_size,
+                    2 * this.size * draw_size);
                 image_cxt.restore();
             }
             
@@ -95,11 +141,11 @@ var tools = {
             control_cxt.strokeStyle = "black";
             control_cxt.translate(mouse.pos.x, mouse.pos.y);
             control_cxt.beginPath(); //satisfaction from the shape of the lines
-            control_cxt.moveTo(-15, -15);
-            control_cxt.lineTo(15, -15);
-            control_cxt.lineTo(15, 15);
-            control_cxt.lineTo(-15, 15);
-            control_cxt.lineTo(-15, -15);
+            control_cxt.moveTo(-1 * this.size * draw_size, -1 * this.size * draw_size);
+            control_cxt.lineTo(1 * this.size * draw_size, -1 * this.size * draw_size);
+            control_cxt.lineTo(1 * this.size * draw_size, 1 * this.size * draw_size);
+            control_cxt.lineTo(-1 * this.size * draw_size, 1 * this.size * draw_size);
+            control_cxt.lineTo(-1 * this.size * draw_size, -1 * this.size * draw_size);
             control_cxt.closePath();
             control_cxt.stroke();
             control_cxt.restore();
@@ -113,7 +159,7 @@ function create_rbutton_group(element, callback) {
     var buttons = element.childNodes;
     //nesting! fun! i code terrible!
     buttons.forEach((b) => {
-        b.addEventListener("click", () => {
+        b.addEventListener("click", (evt) => {
             buttons.forEach((u) => {
                 u.className = "rbutton";
             });
