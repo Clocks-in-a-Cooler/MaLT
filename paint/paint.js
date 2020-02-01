@@ -74,6 +74,12 @@ addEventListener("keyup", function(evt) {
     }
 });
 
+var pencil_sprite = (function() {
+    var sprite = document.createElement("img");
+    sprite.src = "pencil_orange.png";
+    return sprite;
+})();
+
 var tools = {
     "pencil": {
         last_pos: null,
@@ -109,6 +115,7 @@ var tools = {
             
             //draw the pencil
             control_cxt.save();
+            /*
             control_cxt.fillStyle = "black";
             control_cxt.translate(mouse.pos.x, mouse.pos.y);
             control_cxt.beginPath();
@@ -119,6 +126,8 @@ var tools = {
             control_cxt.lineTo(0, 0);
             control_cxt.closePath();
             control_cxt.fill();
+            */
+            control_cxt.drawImage(pencil_sprite, mouse.pos.x, mouse.pos.y - 30);
             control_cxt.restore();
         },
     },
