@@ -10,7 +10,7 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "electron": "6.0.0"
+        "electron": "11.5.0"
     },
     "license": "Unlicense"
 }
